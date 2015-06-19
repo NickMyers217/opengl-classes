@@ -8,6 +8,7 @@
 #include "screen.h"
 #include "shader.h"
 #include "mesh.h"
+#include "camera.h"
 #include "primitives/cube.h"
 #include "primitives/triangle.h"
 
@@ -23,11 +24,13 @@ class Game
 		Shader * m_shader;
 		std::vector<Mesh> m_meshes;
 		std::vector<Mesh>::iterator it_mesh;
+		Camera * m_camera;
 
 		Game();
 		~Game();
 		void run();
 		void handleEvents();
+		void tick();
 		void render();
 		void capFPS(double frameStart);
 };

@@ -7,7 +7,8 @@ SOURCES = \
 		  $(SOURCEPATH)game.cpp \
 		  $(SOURCEPATH)screen.cpp \
 		  $(SOURCEPATH)shader.cpp \
-		  $(SOURCEPATH)mesh.cpp
+		  $(SOURCEPATH)mesh.cpp \
+		  $(SOURCEPATH)camera.cpp
 EXECUTABLE = opengl
 
 all:

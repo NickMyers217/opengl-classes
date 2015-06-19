@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
+#include "transform.h"
 
 
 struct Vertex {
@@ -23,30 +24,6 @@ struct Vertex {
 };
 
 
-struct Transform {
-	glm::vec3 translation;	
-	float angle;
-	glm::vec3 axis;
-	glm::vec3 scale;
-	glm::mat4 modelMatrix;
-
-	Transform() 
-		: translation(glm::vec3(0.0f, 0.0f, 0.0f)),
-		  axis(glm::vec3(0.0f, 1.0f, 0.0f)),
-		  scale(glm::vec3(1.0f, 1.0f, 1.0f))
-	{
-		angle = 0.0f;
-	}
-
-	void calculate()
-	{
-		glm::mat4 translate = glm::translate(glm::mat4(1.0f), translation);
-		glm::mat4 rotate = glm::rotate(translate, angle, axis);
-		modelMatrix = glm::scale(rotate, scale);
-	}
-};
-
-
 class Mesh
 {
 	public:
@@ -61,6 +38,10 @@ class Mesh
 		void addVert(float x, float y, float z);
 		void addVert(float x, float y, float z, float r, float g, float b);
 		void draw();
+
+		glm::mat4 getTransform() {
+			return m_transform.getModelMat();
+		}
 };
 
 #endif
