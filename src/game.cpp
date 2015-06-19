@@ -1,5 +1,6 @@
 #include <iostream>
 #include "primitives/cube.h"
+#include "primitives/triangle.h"
 #include "game.h"
 
 Game::Game()
@@ -8,7 +9,12 @@ Game::Game()
 	  m_camera(new Camera())
 {
 	m_meshes.push_back(Cube());
-	m_meshes[0].init();
+	m_meshes.push_back(Triangle());
+
+	for(it_mesh = m_meshes.begin(); it_mesh < m_meshes.end(); it_mesh++)
+	{
+		it_mesh->init();
+	}
 }
 
 
@@ -52,8 +58,13 @@ void Game::handleEvents()
 
 void Game::tick()
 {
+	// Cube
 	m_meshes[0].m_transform.translation = glm::vec3(0.0f, 0.0f, -2.0f);
 	m_meshes[0].m_transform.angle = sinf(SDL_GetTicks() / 1000.0f);
+
+	//Triangle
+	m_meshes[1].m_transform.translation = glm::vec3(3.0f, 1.0f, -1.0f);
+	m_meshes[1].m_transform.angle = sinf(SDL_GetTicks() / 1000.0f);
 }
 
 
