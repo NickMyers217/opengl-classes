@@ -17,7 +17,9 @@ class Screen
 
 		Screen(int width, int height);
 		~Screen();
+		void clear(float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 1.0f);
 		void swap();
+		bool isOpen();
 		void open();
 		void close();
 };

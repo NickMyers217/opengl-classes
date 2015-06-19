@@ -8,9 +8,11 @@
 #include "screen.h"
 #include "shader.h"
 #include "mesh.h"
+#include "primitives/cube.h"
+#include "primitives/triangle.h"
 
-const int WIDTH = 800;
-const int HEIGHT = 600;
+const int WIDTH = 1920;
+const int HEIGHT = 1080;
 const int FPS = 60;
 const double FRAME_TIME = 1000 / FPS;
 

@@ -1,10 +1,12 @@
 #include "game.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 Game::Game()
 	: m_screen(new Screen(WIDTH, HEIGHT)),
-	  m_shader(new Shader("./res/shaders/vert.glsl", "./res/shaders/frag.glsl"))
+	  m_shader(new Shader("./res/shaders/transform_vert.glsl", "./res/shaders/color_frag.glsl"))
 {
-	m_shader->use();
+	m_meshes.push_back(Cube());
+	m_meshes[0].init();
 }
 
 
@@ -14,10 +16,11 @@ Game::~Game()
 	delete m_screen;
 }
 
+
 void Game::run()
 {
 	m_screen->open();
-	while(m_screen->m_state == OPEN)
+	while(m_screen->isOpen())
 	{
 		double frameStart = (double) SDL_GetTicks();
 
@@ -45,8 +48,21 @@ void Game::handleEvents()
 
 void Game::render()
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	float time = sinf(SDL_GetTicks() / 1000.0f);
+
+	m_screen->clear(0.0f, 0.0f, 0.4f, 1.0f);
+	m_shader->use();
+
+	glm::mat4 projection = glm::perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+	glm::mat4 view = glm::lookAt(glm::vec3(0,5,5), glm::vec3(0,0,0), glm::vec3(0,1,0));
+
+	m_meshes[0].m_transform.translation = glm::vec3(0.0f, 0.0f, -2.0f);
+	m_meshes[0].m_transform.angle = time;
+	m_meshes[0].m_transform.calculate();
+
+	m_shader->setUniformMat4("projection", &projection[0][0]);
+	m_shader->setUniformMat4("view", &view[0][0]);
+	m_shader->setUniformMat4("model", &m_meshes[0].m_transform.modelMatrix[0][0]);
 
 	for(it_mesh = m_meshes.begin(); it_mesh < m_meshes.end(); it_mesh++)
 	{

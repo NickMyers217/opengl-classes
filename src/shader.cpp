@@ -44,15 +44,20 @@ void Shader::setUniform1f(const char * name, float val)
 
 void Shader::setUniform2f(const char * name, float v1, float v2)
 {
-	GLint loc = glGetUniformLocationARB(m_pid, name);
+	GLint loc = glGetUniformLocation(m_pid, name);
 	if(loc != -1) glUniform2f(loc, v1, v2);
 }
 
-
-void Shader::setUniform1i(const char * name, int val)
-{
-	GLint loc = glGetUniformLocationARB(m_pid, name);
+void Shader::setUniform1i(const char * name, int val) {
+	GLint loc = glGetUniformLocation(m_pid, name);
 	if(loc != -1) glUniform1i(loc, val);
+}
+
+
+void Shader::setUniformMat4(const char * name, GLfloat * val)
+{
+	GLint loc = glGetUniformLocation(m_pid, name);
+	if(loc != -1) glUniformMatrix4fv(loc, 1, GL_FALSE, val);
 }
 
 
@@ -65,9 +70,10 @@ void Shader::loadShaderSource(GLuint shader, const char * filePath)
 	{
 		while (getline(file, line))
 		{
-			source += line;
+			source += line + "\n";
 		}
 		file.close();
+		//std::cout << source << std::endl;
 	}
 	else std::cout << "Unable to open file"; 
 
