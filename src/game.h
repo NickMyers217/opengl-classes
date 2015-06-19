@@ -6,7 +6,6 @@
 #include "shader.h"
 #include "mesh.h"
 #include "camera.h"
-#include "primitives/triangle.h"
 
 const int WIDTH = 1920;
 const int HEIGHT = 1080;
