@@ -1,15 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <iostream>
 #include <vector>
-#include <SDL2/SDL.h>
-#include <GL/glew.h>
 #include "screen.h"
 #include "shader.h"
 #include "mesh.h"
 #include "camera.h"
-#include "primitives/cube.h"
 #include "primitives/triangle.h"
 
 const int WIDTH = 1920;

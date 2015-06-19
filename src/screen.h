@@ -2,7 +2,6 @@
 #define SCREEN_H
 
 #include <SDL2/SDL.h>
-#include <GL/glew.h>
 
 enum State { OPEN, CLOSE };
 

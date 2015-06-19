@@ -1,5 +1,6 @@
+#include <iostream>
+#include "primitives/cube.h"
 #include "game.h"
-#include <glm/gtc/matrix_transform.hpp>
 
 Game::Game()
 	: m_screen(new Screen(WIDTH, HEIGHT)),

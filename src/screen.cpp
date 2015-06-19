@@ -1,6 +1,7 @@
-#include "screen.h"
+#include <GL/glew.h>
 #include <assert.h>
 #include <iostream>
+#include "screen.h"
 
 
 Screen::Screen(int width, int height)
