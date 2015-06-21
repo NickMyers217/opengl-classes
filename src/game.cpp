@@ -9,7 +9,8 @@ Game::Game()
 	  m_camera(new Camera())
 {
 	m_meshes.push_back(Cube());
-	m_meshes.push_back(Triangle());
+	m_meshes.push_back(Cube());
+	m_meshes.push_back(Cube());
 
 	for(it_mesh = m_meshes.begin(); it_mesh < m_meshes.end(); it_mesh++)
 	{
@@ -58,19 +59,19 @@ void Game::handleEvents()
 
 void Game::tick()
 {
-	// Cube
-	m_meshes[0].m_transform.translation = glm::vec3(0.0f, 0.0f, -2.0f);
-	m_meshes[0].m_transform.angle = sinf(SDL_GetTicks() / 1000.0f);
+	m_meshes[0].translate(0.0f, 0.0f, -2.0f);
+	m_meshes[0].rotate(sinf(SDL_GetTicks() / 1000.0f), true, true, false);
 
-	//Triangle
-	m_meshes[1].m_transform.translation = glm::vec3(3.0f, 1.0f, -1.0f);
-	m_meshes[1].m_transform.angle = sinf(SDL_GetTicks() / 1000.0f);
+	m_meshes[1].translate(3.0f, 1.0f, -1.0f);
+	m_meshes[1].rotate(sinf(SDL_GetTicks() / 1000.0f), false, true, false);
+
+	m_meshes[2].translate(-3.0f, 1.0f, -1.0f);
+	m_meshes[2].rotate(sinf(SDL_GetTicks() / 1000.0f), true, true, true);
 }
 
 
 void Game::render()
 {
-
 	m_screen->clear(0.0f, 0.0f, 0.4f, 1.0f);
 
 	m_shader->use();
@@ -99,4 +100,3 @@ void Game::capFPS(double frameStart)
 		//std::cout << 1000 / (SDL_GetTicks() - frameStart) << '\n';
 	}
 }
-

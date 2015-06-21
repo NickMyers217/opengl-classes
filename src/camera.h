@@ -24,6 +24,7 @@ class Camera
 
 		void setProjection(float fov = 45.0f, float aspect = 16.0f / 9.0f, float near = 0.1f, float far = 100.0f);
 		void setView(glm::vec3 pos = glm::vec3(0,0,5), glm::vec3 dir = glm::vec3(0,0,0), glm::vec3 up = glm::vec3(0,1,0));
+
 		glm::mat4 getViewMat() { return m_view; }
 		glm::mat4 getProjectionMat() { return m_projection; }
 };

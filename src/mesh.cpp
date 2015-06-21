@@ -63,3 +63,41 @@ void Mesh::draw()
 	glDisableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
+
+
+void Mesh::translate(float x, float y, float z)
+{
+	m_transform.m_translation = glm::vec3(x, y, z);
+}
+
+
+void Mesh::translate(glm::vec3 translation)
+{
+	m_transform.m_translation = translation;
+}
+
+
+void Mesh::rotate(float angle, bool xAxis, bool yAxis, bool zAxis)
+{
+	m_transform.m_angle = angle;
+	m_transform.m_axis = glm::vec3(xAxis, yAxis, zAxis);
+}
+
+
+void Mesh::rotate(float angle, glm::vec3 axis)
+{
+	m_transform.m_angle = angle;
+	m_transform.m_axis = axis;
+}
+
+
+void Mesh::scale(float xScale, float yScale, float zScale)
+{
+	m_transform.m_scale = glm::vec3(xScale, yScale, zScale);
+}
+
+
+void Mesh::scale(glm::vec3 scale)
+{
+	m_transform.m_scale = scale;
+}
