@@ -1,10 +1,11 @@
 #include "camera.h"
+#include <glm/gtx/transform.hpp>
 
 
 Camera::Camera()
 {
 	m_speed = 0.1f;
-	m_sensitivity = 0.01f;
+	m_sensitivity = 0.005f;
 
 	setProjection();
 	setView();
@@ -31,25 +32,32 @@ void Camera::setView(glm::vec3 pos, glm::vec3 dir, glm::vec3 up)
 	m_pos = pos;
 	m_dir = dir;
 	m_up = up;
-	m_view = glm::lookAt(pos, dir, up);
+	m_view = glm::lookAt(pos, pos + dir, up);
 }
 
 
 void Camera::setPosition(float dx, float dy, float dz)
 {
-	m_pos.x += dx * m_speed;
-	m_pos.y += dy * m_speed;
-	m_pos.z += dz * m_speed;
-	m_dir.x += dx * m_speed;
-	m_dir.y += dy * m_speed;
-	m_dir.z += dz * m_speed;
+	if(dz != 0.0f)
+	{
+		m_pos += -1 * dz * m_speed * m_dir;
+	}
+	if(dx != 0.0f)
+	{
+		m_pos += dx * m_speed * glm::cross(m_dir, m_up);
+	}
+	if(dy != 0.0f)
+	{
+		m_pos += dy * m_speed * m_up;
+	}
 }
 
 
 void Camera::setDirection(float dx, float dy)
 {
-	m_dir.x += dx * m_sensitivity;
-	m_dir.y += -1 * dy * m_sensitivity;
+	glm::mat4 rotationMatrix = glm::rotate(-1 * dx * m_sensitivity, m_up) *
+							   glm::rotate(-1 * dy * m_sensitivity, glm::cross(m_dir, m_up));
+	m_dir = glm::mat3(rotationMatrix) * m_dir;
 }
 
 

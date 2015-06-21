@@ -25,11 +25,11 @@ class Camera
 		~Camera();
 
 		void setProjection(float fov = 45.0f, float aspect = 16.0f / 9.0f, float near = 0.1f, float far = 100.0f);
-		void setView(glm::vec3 pos = glm::vec3(0,0,5), glm::vec3 dir = glm::vec3(0,0,0), glm::vec3 up = glm::vec3(0,1,0));
+		void setView(glm::vec3 pos = glm::vec3(0,0,0), glm::vec3 dir = glm::vec3(0,0,-1), glm::vec3 up = glm::vec3(0,1,0));
 		void setPosition(float dx, float dy, float dz);
 		void setDirection(float dx, float dy);
-		glm::mat4 getViewMat();
 
+		glm::mat4 getViewMat();
 		glm::mat4 getProjectionMat() { return m_projection; }
 };
 
