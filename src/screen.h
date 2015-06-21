@@ -7,6 +7,9 @@ enum State { OPEN, CLOSE };
 
 class Screen
 {
+	private:
+		bool m_mouseCaptured;
+
 	public:
 		int m_width;
 		int m_height;
@@ -21,6 +24,7 @@ class Screen
 		bool isOpen();
 		void open();
 		void close();
+		void setMouseCapture(bool capture);
 };
 
 #endif

@@ -10,13 +10,8 @@ Screen::Screen(int width, int height)
 	m_width = width;
 	m_height = height;
 	m_window = nullptr;
-	m_window = SDL_CreateWindow(
-			"OpenGL",
-			SDL_WINDOWPOS_UNDEFINED,
-			SDL_WINDOWPOS_UNDEFINED,
-			m_width,
-			m_height,
-			SDL_WINDOW_OPENGL);
+	m_mouseCaptured = false;
+	m_window = SDL_CreateWindow("OpenGL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_width, m_height, SDL_WINDOW_OPENGL);
 	assert(m_window != nullptr);
 	m_context = SDL_GL_CreateContext(m_window);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -67,4 +62,20 @@ void Screen::open()
 void Screen::close()
 {
 	m_state = CLOSE;
+}
+
+
+void Screen::setMouseCapture(bool capture)
+{
+	if(capture && !m_mouseCaptured)
+	{
+		if(SDL_SetRelativeMouseMode((SDL_bool)true) == 0)
+			m_mouseCaptured = true;
+	}
+
+	if(!capture && m_mouseCaptured)
+	{
+		if(SDL_SetRelativeMouseMode((SDL_bool)false) == 0)
+			m_mouseCaptured = false;
+	}
 }

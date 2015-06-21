@@ -6,6 +6,7 @@
 #include "shader.h"
 #include "mesh.h"
 #include "camera.h"
+#include "input.h"
 
 const int WIDTH = 1920;
 const int HEIGHT = 1080;
@@ -20,6 +21,7 @@ class Game
 		std::vector<Mesh> m_meshes;
 		std::vector<Mesh>::iterator it_mesh;
 		Camera * m_camera;
+		InputManager * m_input;
 
 		Game();
 		~Game();

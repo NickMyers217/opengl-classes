@@ -6,7 +6,8 @@
 Game::Game()
 	: m_screen(new Screen(WIDTH, HEIGHT)),
 	  m_shader(new Shader("./res/shaders/transform_vert.glsl", "./res/shaders/color_frag.glsl")),
-	  m_camera(new Camera())
+	  m_camera(new Camera()),
+	  m_input(new InputManager())
 {
 	m_meshes.push_back(Cube());
 	m_meshes.push_back(Cube());
@@ -21,6 +22,7 @@ Game::Game()
 
 Game::~Game()
 {
+	delete m_input;
 	delete m_camera;
 	delete m_shader;
 	delete m_screen;
@@ -30,6 +32,7 @@ Game::~Game()
 void Game::run()
 {
 	m_screen->open();
+	m_screen->setMouseCapture(true);
 	while(m_screen->isOpen())
 	{
 		double frameStart = (double) SDL_GetTicks();
@@ -52,6 +55,25 @@ void Game::handleEvents()
 			case SDL_QUIT:
 				m_screen->close();
 				break;
+			case SDL_MOUSEBUTTONDOWN:
+				m_screen->setMouseCapture(true);
+				break;
+			case SDL_MOUSEMOTION:
+				m_camera->setDirection(e.motion.xrel, e.motion.yrel);
+				break;
+			case SDL_KEYDOWN:
+				switch(e.key.keysym.sym)
+				{
+					case SDLK_ESCAPE: 
+						m_screen->setMouseCapture(false);
+						break;
+					default:
+						m_input->pressKey(e.key.keysym.sym);
+				}
+				break;
+			case SDL_KEYUP:
+				m_input->releaseKey(e.key.keysym.sym);
+				break;
 		}
 	}
 }
@@ -59,6 +81,13 @@ void Game::handleEvents()
 
 void Game::tick()
 {
+	if(m_input->isPressed(SDLK_a)) m_camera->setPosition(-1.0f,  0.0f,  0.0f);
+	if(m_input->isPressed(SDLK_w)) m_camera->setPosition( 0.0f,  0.0f, -1.0f);
+	if(m_input->isPressed(SDLK_d)) m_camera->setPosition( 1.0f,  0.0f,  0.0f);
+	if(m_input->isPressed(SDLK_s)) m_camera->setPosition( 0.0f,  0.0f,  1.0f);
+	if(m_input->isPressed(SDLK_q)) m_camera->setPosition( 0.0f,  1.0f,  0.0f);
+	if(m_input->isPressed(SDLK_e)) m_camera->setPosition( 0.0f, -1.0f,  0.0f);
+
 	m_meshes[0].translate(0.0f, 0.0f, -2.0f);
 	m_meshes[0].rotate(sinf(SDL_GetTicks() / 1000.0f), true, true, false);
 
