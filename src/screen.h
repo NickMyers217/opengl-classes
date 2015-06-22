@@ -7,24 +7,27 @@ enum State { OPEN, CLOSE };
 
 class Screen
 {
-	private:
-		bool m_mouseCaptured;
+private:
+	bool m_mouseCaptured;
 
-	public:
-		int m_width;
-		int m_height;
-		SDL_Window * m_window;
-		SDL_GLContext m_context;
-		State m_state;
+public:
+	int m_width;
+	int m_height;
+	SDL_Window * m_window;
+	SDL_GLContext m_context;
+	State m_state;
 
-		Screen(int width, int height);
-		~Screen();
-		void clear(float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 1.0f);
-		void swap();
-		bool isOpen();
-		void open();
-		void close();
-		void setMouseCapture(bool capture);
+	Screen(int width, int height);
+	~Screen();
+
+	void clear(float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 1.0f);
+	void swap();
+	bool isOpen();
+	void open();
+	void close();
+	void setMouseCapture(bool capture);
+
+	inline bool isCaptured() { return m_mouseCaptured; }
 };
 
 #endif

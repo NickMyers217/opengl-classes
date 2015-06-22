@@ -8,28 +8,31 @@
 #include "camera.h"
 #include "input.h"
 
-const int WIDTH = 1920;
-const int HEIGHT = 1080;
-const int FPS = 60;
-const double FRAME_TIME = 1000 / FPS;
 
 class Game
 {
-	public:
-		Screen * m_screen;
-		Shader * m_shader;
-		std::vector<Mesh> m_meshes;
-		std::vector<Mesh>::iterator it_mesh;
-		Camera * m_camera;
-		InputManager * m_input;
+private:
+	int m_width;
+	int m_height;
+	int m_fps;
+	double m_frametime;
+	bool m_wireframe;
 
-		Game();
-		~Game();
-		void run();
-		void handleEvents();
-		void tick();
-		void render();
-		void capFPS(double frameStart);
+public:
+	Screen * m_screen;
+	Shader * m_shader;
+	std::vector<Mesh> m_meshes;
+	std::vector<Mesh>::iterator it_mesh;
+	InputManager * m_input;
+	Camera * m_camera;
+
+	Game(int width, int height, int fps);
+	~Game();
+	void run();
+	void handleEvents();
+	void tick();
+	void render();
+	void capFPS(double frameStart);
 };
 
 #endif

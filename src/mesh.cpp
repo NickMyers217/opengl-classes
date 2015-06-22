@@ -10,7 +10,7 @@ Mesh::Mesh()
 
 Mesh::~Mesh()
 {
-	if(m_id != 0)
+	if (m_id != 0)
 	{
 		glDeleteBuffers(1, &m_id);
 	}
@@ -19,7 +19,7 @@ Mesh::~Mesh()
 
 void Mesh::init()
 {
-	if(m_id == 0)
+	if (m_id == 0)
 	{
 		glGenBuffers(1, &m_id);
 	}

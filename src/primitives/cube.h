@@ -5,9 +5,11 @@
 
 class Cube : public Mesh
 {
-	public:
-		Cube()
-			: Mesh()
+public:
+	Cube(bool colored)
+		: Mesh()
+	{
+		if (colored)
 		{
 			addVert(-1.0f, -1.0f, -1.0f, 0.583f, 0.771f, 0.014f);
 			addVert(-1.0f, -1.0f, 1.0f, 0.609f, 0.115f, 0.436f);
@@ -46,6 +48,46 @@ class Cube : public Mesh
 			addVert(-1.0f, 1.0f, 1.0f, 0.820f, 0.883f, 0.371f);
 			addVert(1.0f, -1.0f, 1.0f, 0.982f, 0.099f, 0.879f);
 		}
+		else
+		{
+			addVert(-1.0f, -1.0f, -1.0f);
+			addVert(-1.0f, -1.0f, 1.0f);
+			addVert(-1.0f, 1.0f, 1.0f);
+			addVert(1.0f, 1.0f, -1.0f);
+			addVert(-1.0f, -1.0f, -1.0f);
+			addVert(-1.0f, 1.0f, -1.0f);
+			addVert(1.0f, -1.0f, 1.0f);
+			addVert(-1.0f, -1.0f, -1.0f);
+			addVert(1.0f, -1.0f, -1.0f);
+			addVert(1.0f, 1.0f, -1.0f);
+			addVert(1.0f, -1.0f, -1.0f);
+			addVert(-1.0f, -1.0f, -1.0f);
+			addVert(-1.0f, -1.0f, -1.0f);
+			addVert(-1.0f, 1.0f, 1.0f);
+			addVert(-1.0f, 1.0f, -1.0f);
+			addVert(1.0f, -1.0f, 1.0f);
+			addVert(-1.0f, -1.0f, 1.0f);
+			addVert(-1.0f, -1.0f, -1.0f);
+			addVert(-1.0f, 1.0f, 1.0f);
+			addVert(-1.0f, -1.0f, 1.0f);
+			addVert(1.0f, -1.0f, 1.0f);
+			addVert(1.0f, 1.0f, 1.0f);
+			addVert(1.0f, -1.0f, -1.0f);
+			addVert(1.0f, 1.0f, -1.0f);
+			addVert(1.0f, -1.0f, -1.0f);
+			addVert(1.0f, 1.0f, 1.0f);
+			addVert(1.0f, -1.0f, 1.0f);
+			addVert(1.0f, 1.0f, 1.0f);
+			addVert(1.0f, 1.0f, -1.0f);
+			addVert(-1.0f, 1.0f, -1.0f);
+			addVert(1.0f, 1.0f, 1.0f);
+			addVert(-1.0f, 1.0f, -1.0f);
+			addVert(-1.0f, 1.0f, 1.0f);
+			addVert(1.0f, 1.0f, 1.0f);
+			addVert(-1.0f, 1.0f, 1.0f);
+			addVert(1.0f, -1.0f, 1.0f);
+		}
+	}
 };
 
 #endif

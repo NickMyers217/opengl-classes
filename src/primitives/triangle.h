@@ -5,14 +5,14 @@
 
 class Triangle : public Mesh
 {
-	public:
-		Triangle()
-			: Mesh()
-		{
-			addVert(-1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f);
-			addVert( 0.0f,  1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-			addVert( 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
-		}
+public:
+	Triangle()
+		: Mesh()
+	{
+		addVert(-1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f);
+		addVert(0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+		addVert(1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+	}
 };
 
 #endif

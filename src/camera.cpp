@@ -38,15 +38,15 @@ void Camera::setView(glm::vec3 pos, glm::vec3 dir, glm::vec3 up)
 
 void Camera::setPosition(float dx, float dy, float dz)
 {
-	if(dz != 0.0f)
+	if (dz != 0.0f)
 	{
 		m_pos += -1 * dz * m_speed * m_dir;
 	}
-	if(dx != 0.0f)
+	if (dx != 0.0f)
 	{
 		m_pos += dx * m_speed * glm::cross(m_dir, m_up);
 	}
-	if(dy != 0.0f)
+	if (dy != 0.0f)
 	{
 		m_pos += dy * m_speed * m_up;
 	}
@@ -55,9 +55,12 @@ void Camera::setPosition(float dx, float dy, float dz)
 
 void Camera::setDirection(float dx, float dy)
 {
-	glm::mat4 rotationMatrix = glm::rotate(-1 * dx * m_sensitivity, m_up) *
-							   glm::rotate(-1 * dy * m_sensitivity, glm::cross(m_dir, m_up));
-	m_dir = glm::mat3(rotationMatrix) * m_dir;
+	glm::mat4 xRot = glm::rotate(-1 * dx * m_sensitivity, m_up);
+	glm::mat4 yRot = glm::rotate(-1 * dy * m_sensitivity, glm::cross(m_dir, m_up));
+	glm::vec3 newDir = glm::mat3(xRot * yRot) * m_dir;
+
+	if (newDir.y <= 0.95f && newDir.y >= -0.95f)
+		m_dir = newDir;
 }
 
 
