@@ -1,6 +1,7 @@
 #include <iostream>
 #include "primitives/cube.h"
 #include "primitives/triangle.h"
+#include "primitives/plane.h"
 #include "game.h"
 
 Game::Game()
@@ -10,8 +11,7 @@ Game::Game()
 	  m_input(new InputManager())
 {
 	m_meshes.push_back(Cube());
-	m_meshes.push_back(Cube());
-	m_meshes.push_back(Cube());
+	m_meshes.push_back(Plane(20, 20));
 
 	for(it_mesh = m_meshes.begin(); it_mesh < m_meshes.end(); it_mesh++)
 	{
@@ -88,14 +88,8 @@ void Game::tick()
 	if(m_input->isPressed(SDLK_q)) m_camera->setPosition( 0.0f,  1.0f,  0.0f);
 	if(m_input->isPressed(SDLK_e)) m_camera->setPosition( 0.0f, -1.0f,  0.0f);
 
-	m_meshes[0].translate(0.0f, 0.0f, -7.0f);
-	m_meshes[0].rotate(sinf(SDL_GetTicks() / 1000.0f), true, true, false);
-
-	m_meshes[1].translate(3.0f, 1.0f, -5.0f);
-	m_meshes[1].rotate(sinf(SDL_GetTicks() / 1000.0f), false, true, false);
-
-	m_meshes[2].translate(-3.0f, 1.0f, -5.0f);
-	m_meshes[2].rotate(sinf(SDL_GetTicks() / 1000.0f), true, true, true);
+	m_meshes[0].translate(10.0f, 5.0f, -10.0f);
+	m_meshes[0].rotate(sinf(SDL_GetTicks() / 1000.0f), false, true, false);
 }
 
 
