@@ -9,16 +9,25 @@
 
 struct Vertex {
 	glm::vec3 point;
+	glm::vec3 normal;
 	glm::vec3 color;
 
 	Vertex(float x, float y, float z)
-		: point(glm::vec3(x, y, z)),
-		color(glm::vec3(1.0f, 1.0f, 1.0f))
+		: point(x, y, z),
+		normal(0.0f, 0.0f, 0.0f),
+		color(1.0f, 1.0f, 1.0f)
 	{}
 
-	Vertex(float x, float y, float z, float r, float g, float b)
-		: point(glm::vec3(x, y, z)),
-		color(glm::vec3(r, g, b))
+	Vertex(float x, float y, float z, float nx, float ny, float nz)
+		: point(x, y, z),
+		normal(nx, ny, nz),
+		color(1.0f, 1.0f, 1.0f)
+	{}
+
+	Vertex(float x, float y, float z, float nx, float ny, float nz, float r, float g, float b)
+		: point(x, y, z),
+		normal(nx, ny, nz),
+		color(r, g, b)
 	{}
 };
 
@@ -27,18 +36,19 @@ class Mesh
 {
 private:
 	Transform m_transform;
-
-public:
-	GLuint m_id;
+	GLuint m_vao;
+	GLuint m_vbo;
 	std::vector<Vertex> m_verts;
 
+public:
 	Mesh();
 	~Mesh();
 
 	void init();
 	void addVert(Vertex vert);
 	void addVert(float x, float y, float z);
-	void addVert(float x, float y, float z, float r, float g, float b);
+	void addVert(float x, float y, float z, float nx, float ny, float nz);
+	void addVert(float x, float y, float z, float nx, float ny, float nz, float r, float g, float b);
 	void draw();
 	void translate(float x, float y, float z);
 	void translate(glm::vec3 translation);

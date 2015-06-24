@@ -13,12 +13,12 @@ public:
 		{
 			for (float x = 0.0f; x < sizeX; x++)
 			{
-				addVert(x, 0.0f, -z);
-				addVert(x, 0.0f, -z - 1);
-				addVert(x + 1, 0.0f, -z - 1);
-				addVert(x + 1, 0.0f, -z - 1);
-				addVert(x + 1, 0.0f, -z);
-				addVert(x, 0.0f, -z);
+				addVert(x, 0.0f, -z, 0.0f, 1.0f, 0.0f);
+				addVert(x + 1, 0.0f, -z - 1, 0.0f, 1.0f, 0.0f);
+				addVert(x, 0.0f, -z - 1, 0.0f, 1.0f, 0.0f);
+				addVert(x, 0.0f, -z, 0.0f, 1.0f, 0.0f);
+				addVert(x + 1, 0.0f, -z, 0.0f, 1.0f, 0.0f);
+				addVert(x + 1, 0.0f, -z - 1, 0.0f, 1.0f, 0.0f);
 			}
 		}
 	}

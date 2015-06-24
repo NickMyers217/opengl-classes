@@ -1,18 +1,24 @@
 #version 440
 
-layout(location = 0) in vec3 vertexPosition_modelspace;
-layout(location = 1) in vec3 vertexColor;
+layout(location = 0) in vec3 vertexPos_model;
+layout(location = 1) in vec3 vertexNormal;
+layout(location = 2) in vec3 vertexColor;
 
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+out vec3 pos_world;
 out vec3 color;
+out vec3 normal;
 
 
 void main()
 {
-	gl_Position = (projection * view * model) * vec4(vertexPosition_modelspace, 1.0);
+	gl_Position = (projection * view * model) * vec4(vertexPos_model, 1.0);
+
+	pos_world = vec3(model * vec4(vertexPos_model, 1.0));
 	color = vertexColor;
+	normal = vertexNormal;
 }
 

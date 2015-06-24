@@ -16,6 +16,7 @@ public:
 	void use();
 	void setUniform(const char * name, float val);
 	void setUniform(const char * name, float v1, float v2);
+	void setUniform(const char * name, float v1, float v2, float v3);
 	void setUniform(const char * name, int val);
 	void setUniform(const char * name, GLfloat * val);
 	void loadShaderSource(GLuint shader, const char * filePath);

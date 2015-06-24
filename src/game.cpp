@@ -15,6 +15,7 @@ Game::Game(int width, int height, int fps)
 	m_fps = fps;
 	m_frametime = 1000.0 / fps;
 	m_wireframe = false;
+
 	m_meshes.push_back(Plane(20.0f, 20.0f));
 	m_meshes.push_back(Cube(true));
 
@@ -123,6 +124,9 @@ void Game::render()
 	m_shader->use();
 	m_shader->setUniform("projection", &m_camera->getProjectionMat()[0][0]);
 	m_shader->setUniform("view", &m_camera->getViewMat()[0][0]);
+	m_shader->setUniform("ambientLight", 0.05f, 0.05f, 0.05f);
+	m_shader->setUniform("lightPos_world", 14.0f, 3.0f, -11.0f);
+
 
 	for (it_mesh = m_meshes.begin(); it_mesh < m_meshes.end(); it_mesh++)
 	{
@@ -145,5 +149,5 @@ void Game::capFPS(double frameStart)
 		SDL_Delay((Uint32)(m_frametime - frameDiff));
 	}
 
-	std::cout << 1000 / (SDL_GetTicks() - frameStart) << '\r';
+	//std::cout << 1000 / (SDL_GetTicks() - frameStart) << '\r';
 }

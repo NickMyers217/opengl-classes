@@ -19,6 +19,7 @@ Screen::Screen(int width, int height)
 	GLenum glewStatus = glewInit();
 	assert(glewStatus == GLEW_OK);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 	glDepthFunc(GL_LESS);
 	std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
 	std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
