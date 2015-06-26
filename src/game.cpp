@@ -6,7 +6,7 @@
 
 Game::Game(int width, int height, int fps)
 	: m_screen(new Screen(width, height)),
-	m_shader(new Shader("../res/shaders/transform_vert.glsl", "../res/shaders/color_frag.glsl")),
+	m_shader(new Shader()),
 	m_input(new InputManager()),
 	m_camera(new Camera())
 {
