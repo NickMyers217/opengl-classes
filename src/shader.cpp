@@ -59,6 +59,13 @@ void Shader::setUniform(const char * name, float v1, float v2, float v3)
 }
 
 
+void Shader::setUniform(const char * name, glm::vec3 v)
+{
+	GLint loc = glGetUniformLocation(m_pid, name);
+	if (loc != -1) glUniform3f(loc, v.x, v.y, v.z);
+}
+
+
 void Shader::setUniform(const char * name, int val) {
 	GLint loc = glGetUniformLocation(m_pid, name);
 	if (loc != -1) glUniform1i(loc, val);

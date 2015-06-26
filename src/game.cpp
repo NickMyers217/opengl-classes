@@ -17,7 +17,7 @@ Game::Game(int width, int height, int fps)
 	m_wireframe = false;
 
 	m_meshes.push_back(Plane(20.0f, 20.0f));
-	m_meshes.push_back(Cube(true));
+	m_meshes.push_back(Cube());
 
 	for (it_mesh = m_meshes.begin(); it_mesh < m_meshes.end(); it_mesh++)
 	{
@@ -112,7 +112,8 @@ void Game::tick()
 	}
 
 	m_meshes[0].translate(0.0f, -1.0f, 0.0f);
-	m_meshes[1].translate(10.0f, 5.0f, -10.0f);
+	//m_meshes[1].translate(10.0f, 5.0f, -10.0f);
+	m_meshes[1].translate(10.0f, sinf(SDL_GetTicks() / 1000.0f) + 5.0f, -10.0f);
 	m_meshes[1].rotate(sinf(SDL_GetTicks() / 1000.0f), false, true, false);
 }
 
@@ -126,7 +127,7 @@ void Game::render()
 	m_shader->setUniform("view", &m_camera->getViewMat()[0][0]);
 	m_shader->setUniform("ambientLight", 0.05f, 0.05f, 0.05f);
 	m_shader->setUniform("lightPos_world", 14.0f, 3.0f, -11.0f);
-
+	m_shader->setUniform("eyePos_world", m_camera->m_pos);
 
 	for (it_mesh = m_meshes.begin(); it_mesh < m_meshes.end(); it_mesh++)
 	{

@@ -6,7 +6,7 @@
 class Cube : public Mesh
 {
 public:
-	Cube(bool colored)
+	Cube(bool colored = false)
 		: Mesh()
 	{
 		if (colored)
