@@ -1,9 +1,10 @@
 #include "mesh.h"
 
 
-Mesh::Mesh()
+Mesh::Mesh(Texture * texture)
 	: m_transform(Transform())
 {
+	m_texture = texture;
 	m_vao = 0;
 	m_vbo = 0;
 }
@@ -34,7 +35,7 @@ void Mesh::init()
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)(sizeof(float) * 3));
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)(sizeof(float) * 6));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)(sizeof(float) * 6));
 
 	glBindVertexArray(0);
 }
@@ -60,9 +61,9 @@ void Mesh::addVert(float x, float y, float z, float nx, float ny, float nz)
 }
 
 
-void Mesh::addVert(float x, float y, float z, float nx, float ny, float nz, float r, float g, float b)
+void Mesh::addVert(float x, float y, float z, float nx, float ny, float nz, float u, float v)
 {
-	Vertex vert = Vertex(x, y, z, nx, ny, nz, r, g, b);
+	Vertex vert = Vertex(x, y, z, nx, ny, nz, u, v);
 	addVert(vert);
 }
 

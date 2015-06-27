@@ -5,29 +5,30 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include "transform.h"
+#include "texture.h"
 
 
 struct Vertex {
 	glm::vec3 point;
 	glm::vec3 normal;
-	glm::vec3 color;
+	glm::vec2 uv;
 
 	Vertex(float x, float y, float z)
 		: point(x, y, z),
 		normal(0.0f, 0.0f, 0.0f),
-		color(1.0f, 1.0f, 1.0f)
+		uv(0.0f, 0.0f)
 	{}
 
 	Vertex(float x, float y, float z, float nx, float ny, float nz)
 		: point(x, y, z),
 		normal(nx, ny, nz),
-		color(1.0f, 1.0f, 1.0f)
+		uv(0.0f, 0.0f)
 	{}
 
-	Vertex(float x, float y, float z, float nx, float ny, float nz, float r, float g, float b)
+	Vertex(float x, float y, float z, float nx, float ny, float nz, float u, float v)
 		: point(x, y, z),
 		normal(nx, ny, nz),
-		color(r, g, b)
+		uv(u, v)
 	{}
 };
 
@@ -41,14 +42,16 @@ private:
 	std::vector<Vertex> m_verts;
 
 public:
-	Mesh();
+	Texture * m_texture;
+
+	Mesh(Texture * texture);
 	~Mesh();
 
 	void init();
 	void addVert(Vertex vert);
 	void addVert(float x, float y, float z);
 	void addVert(float x, float y, float z, float nx, float ny, float nz);
-	void addVert(float x, float y, float z, float nx, float ny, float nz, float r, float g, float b);
+	void addVert(float x, float y, float z, float nx, float ny, float nz, float u, float v);
 	void draw();
 	void translate(float x, float y, float z);
 	void translate(glm::vec3 translation);

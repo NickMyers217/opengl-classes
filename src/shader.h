@@ -11,7 +11,7 @@ public:
 	GLuint m_vid;
 	GLuint m_fid;
 
-	Shader(const char * vertFile = "../res/shaders/vert.glsl", const char * fragFile = "../res/shaders/frag.glsl");
+	Shader(const char * vertFile = "../res/shaders/default_vert.glsl", const char * fragFile = "../res/shaders/default_frag.glsl");
 	~Shader();
 
 	void use();

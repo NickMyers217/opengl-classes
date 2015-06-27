@@ -6,9 +6,10 @@
 
 Game::Game(int width, int height, int fps)
 	: m_screen(new Screen(width, height)),
-	m_shader(new Shader()),
 	m_input(new InputManager()),
-	m_camera(new Camera())
+	m_shader(new Shader()),
+	m_camera(new Camera()),
+	test("../res/textures/default.png", 0)
 {
 	m_width = width;
 	m_height = height;
@@ -16,8 +17,12 @@ Game::Game(int width, int height, int fps)
 	m_frametime = 1000.0 / fps;
 	m_wireframe = false;
 
-	m_meshes.push_back(Plane(20.0f, 20.0f));
-	m_meshes.push_back(Cube());
+	m_textures.reserve(32);
+	m_textures.push_back(new Texture("../res/textures/default.png", 0));
+	m_textures.push_back(new Texture("../res/textures/bricks.jpg", 1));
+
+	m_meshes.push_back(Plane(m_textures[1], 20.0f, 20.0f));
+	m_meshes.push_back(Cube(m_textures[0]));
 
 	for (it_mesh = m_meshes.begin(); it_mesh < m_meshes.end(); it_mesh++)
 	{
@@ -32,6 +37,9 @@ Game::~Game()
 	delete m_input;
 	delete m_shader;
 	delete m_screen;
+
+	for (it_texture = m_textures.begin(); it_texture < m_textures.end(); it_texture++)
+		delete *it_texture;
 }
 
 
@@ -112,7 +120,6 @@ void Game::tick()
 	}
 
 	m_meshes[0].translate(0.0f, -1.0f, 0.0f);
-	//m_meshes[1].translate(10.0f, 5.0f, -10.0f);
 	m_meshes[1].translate(10.0f, sinf(SDL_GetTicks() / 1000.0f) + 5.0f, -10.0f);
 	m_meshes[1].rotate(sinf(SDL_GetTicks() / 1000.0f), false, true, false);
 }
@@ -131,6 +138,8 @@ void Game::render()
 
 	for (it_mesh = m_meshes.begin(); it_mesh < m_meshes.end(); it_mesh++)
 	{
+		it_mesh->m_texture->use();
+		m_shader->setUniform("texsampler", it_mesh->m_texture->m_unit);
 		m_shader->setUniform("model", &it_mesh->getTransform()[0][0]);
 		it_mesh->draw();
 	}
